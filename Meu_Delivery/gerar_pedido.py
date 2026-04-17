@@ -7,7 +7,7 @@ class JanelaPedido:
 
     def __init__(self, parent):
         self.top = tk.Toplevel(parent)
-        self.top.title("Gerar Novo Pedido - JAD")
+        self.top.title("***** Sistema JAD SQlite *****")
         self.top.geometry("800x650")
         self.top.grab_set() # Foca na janela de pedido
 
@@ -19,7 +19,7 @@ class JanelaPedido:
 
     def setup_ui(self):
         # --- Título ---
-        tk.Label(self.top, text="Registro de Pedidos Delivery", font=("Arial", 18, "bold")).pack(pady=10)
+        tk.Label(self.top, text="*** Registro de Pedidos ***", font=("Arial", 18, "bold")).pack(pady=10)
 
         # --- Seleção de Cliente (Novo Campo necessário para o Banco) ---
         cliente_frame = tk.Frame(self.top)
