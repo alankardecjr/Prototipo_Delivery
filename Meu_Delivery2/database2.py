@@ -148,7 +148,7 @@ def listar_pedidos():
     conn = conectar()
     cursor = conn.cursor()
     query = """
-    SELECT p.id, c.nome, p.valor_total, p.data, p.status 
+    SELECT p.id, c.nome, p.valor_total, p.data, p.status, c.status 
     FROM pedidos p
     JOIN clientes c ON p.cliente_id = c.id 
     ORDER BY p.id DESC

@@ -86,7 +86,12 @@ class SistemaJAD:
                 if "Inativo" in str(d): tag = "inativo"
                 if "Finalizado" in str(d): tag = "finalizado"
                 if "Idoso" in str(d) or "PCD" in str(d): tag = "prioridade"
-                self.tree.insert("", "end", values=d, tags=(tag,))
+
+                if self.tree.heading(self.tree["columns"][1])["text"] == "Nome":
+                    self.tree.insert("", "end", values=d, tags=(tag,))
+                else:
+                    cliente_exibir = f"{d[1]} ({d[5]})"
+                    self.tree.insert("", "end", values=(d[0], cliente_exibir, d[2], d[3], d[4]), tags=(tag,))
 
     def exibir_clientes(self):
         self.lbl_total.config(text="") 
@@ -114,8 +119,9 @@ class SistemaJAD:
         total_vendas = 0
         for p in database2.listar_pedidos():
             total_vendas += p[2] 
+            cliente_exibir = f"{p[1]} ({p[5]})"
             tag = "finalizado" if p[4] == "Finalizado" else ""
-            self.tree.insert("", "end", values=p, tags=(tag,))
+            self.tree.insert("", "end", values=(p[0], cliente_exibir, p[2], p[3], p[4]), tags=(tag,))
         
         self.lbl_total.config(text=f"Total em Pedidos: R$ {total_vendas:.2f}")
 
@@ -135,7 +141,9 @@ class SistemaJAD:
                 self.root.wait_window(janela)
                 self.exibir_clientes()
             else:
-                messagebox.showinfo("Info", "Para editar pedidos, use o sistema de finalização.")
+                janela = JanelaPedido(self.root)
+                self.root.wait_window(janela.top)
+                self.exibir_pedidos()
         except Exception as e:
             messagebox.showerror("Erro", "Não foi possível identificar a seleção.")
 
