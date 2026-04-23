@@ -46,8 +46,8 @@ class SistemaJAD:
 
         botoes = [
             ("Novo Cliente", self.abrir_cadastro),
+            ("Ver Clientes", self.exibir_clientes),
             ("Editar", self.editar_selecionado),
-            ("Listar Clientes", self.exibir_clientes),
             ("Ver Pedidos", self.exibir_pedidos),
             ("Gerar Pedido", self.abrir_pedido),
             ("Sair", self.confirmar_saida)
